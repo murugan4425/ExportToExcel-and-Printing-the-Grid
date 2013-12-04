@@ -220,7 +220,7 @@
              <asp:Button ID="btnprint" runat="server" OnClick="btnprint_Click" Text="Print" />
         </div>
         <div>
-             <button type="button" data-filter-column="5" data-filter-text="2?%">Saved Search</button> (search the Discount column for "2?%")<br>
+             <button type="button" data-filter-column="5" data-filter-text="2?%">Saved Search</button><br>
   <button type="button" class="reset">Reset Search</button> <!-- targeted by the "filter_reset" option -->
 
   <table class="tablesorter">
