@@ -8,17 +8,36 @@ using System.Data;
 using System.IO;
 using System.Configuration;
 using System.Text;
+using JSONConverter;
+using System.Globalization;
 
 public partial class _Default : System.Web.UI.Page
 {
     string location = ConfigurationManager.AppSettings["Folder"];
     protected void Page_Load(object sender, EventArgs e)
-    {       
-                
+    {
+       
+    }
+   
+    public class Person
+    {
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        
     }
     protected void btnLoadGrid_Click(object sender, EventArgs e)
     {
         BindGrid();
+
+        List<Person> people = new List<Person>{
+                   new Person{ID = 1, FirstName = "Scott", LastName = "Gurthie"},
+                   new Person{ID = 2, FirstName = "", LastName = "Gates"},
+                   new Person{ID = 3, FirstName = "Krishna", LastName = "Mouli"}
+                   };
+
+        string jsonString = people.ToJSON();
+      
     }
     public void BindGrid()
     {
@@ -31,8 +50,8 @@ public partial class _Default : System.Web.UI.Page
         db.Columns.Add("Branch");
         db.Columns.Add("Logons Count");
         db.Columns.Add("Last Logon");
-        db.Rows.Add("Paramjit", "Sanghera", "Systems & Data Co-ordinator", "paramjit.sanghera@ba.com", "British Airways", "Waterside", "1278", "10/23/2013  2:35:18 PM");
-        db.Rows.Add("Juliana", "Araujo", "Account Manager", "Juliana.Araujo@LSGSkyChefs.com", "Catering Company", "NULL", "11", "10/23/2013  1:08:37 PM");
+        db.Rows.Add("Paramjit", "前菜", "Systems & Data Co-ordinator", "paramjit.sanghera@ba.com", "British Airways", "Waterside", "1278", "10/23/2013  2:35:18 PM");
+        db.Rows.Add("Juliana", "主菜", "Account Manager", "Juliana.Araujo@LSGSkyChefs.com", "Catering Company", "NULL", "11", "10/23/2013  1:08:37 PM");
         Session["GridData"] = db;
         tablesorter.DataSource = db;
         tablesorter.DataBind();
@@ -48,8 +67,14 @@ public partial class _Default : System.Web.UI.Page
         }
         //exportData = (DataTable)grdUsersList.DataSource;
         //open file 
-        StreamWriter wr = new StreamWriter(location+"/ApplicationUsage.csv");
+        System.Globalization.CultureInfo ci = null;
+        ci = System.Globalization.CultureInfo.CreateSpecificCulture("ja-JP");
+       // FormattingStreamWriter wr = new FormattingStreamWriter(location + "/ApplicationUsage.csv",ci);
+        
+        // Culture changed to Japanese in Web.config file
 
+        StreamWriter wr = new StreamWriter(location+"/ApplicationUsage.csv");
+       
         //determine the number of columns and write columns to file 
         cols = exportData.Columns.Count;
         for (int i = 0; i < cols; i++)
@@ -80,7 +105,23 @@ public partial class _Default : System.Web.UI.Page
         wr.Close();
         DownLoad(location + "\\ApplicationUsage.csv");
     }
-
+    //public class FormattingStreamWriter : StreamWriter
+    //{
+    //    private readonly IFormatProvider formatProvider;
+ 
+    //    public FormattingStreamWriter(string path, IFormatProvider formatProvider)
+    //        : base(path)
+    //    {
+    //        this.formatProvider = formatProvider;
+    //    }
+    //    public override IFormatProvider FormatProvider
+    //    {
+    //        get
+    //        {
+    //            return this.formatProvider;
+    //        }
+    //    }
+    //}
     public void DownLoad(string FName)
     {
         string path = FName;
