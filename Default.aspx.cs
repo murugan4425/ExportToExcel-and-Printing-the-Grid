@@ -24,6 +24,7 @@ public partial class _Default : System.Web.UI.Page
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+		public string Addr {get;set;}
         
     }
     protected void btnLoadGrid_Click(object sender, EventArgs e)

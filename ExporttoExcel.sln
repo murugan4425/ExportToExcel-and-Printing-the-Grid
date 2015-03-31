@@ -5,14 +5,14 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ExporttoExcel", "..\Exportt
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/ExporttoExcel"
-		Debug.AspNetCompiler.PhysicalPath = "D:\Mouli\Projects\ExporttoExcel\"
+		
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ExporttoExcel\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/ExporttoExcel"
-		Release.AspNetCompiler.PhysicalPath = "D:\Mouli\Projects\ExporttoExcel\"
+		
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ExporttoExcel\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
